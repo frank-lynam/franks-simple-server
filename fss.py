@@ -11,6 +11,8 @@ class fss(http.server.BaseHTTPRequestHandler):
       path += "index.html"
     if os.path.isfile(httpath + path):
       s.send_response(200)
+      if path.endswith("svg"):
+        s.send_header("Content-type", "image/svg+xml")
       s.end_headers()
       with open(httpath + path, 'br') as fl:
         s.wfile.write(fl.read())
